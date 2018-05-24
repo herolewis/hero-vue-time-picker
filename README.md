@@ -2,17 +2,28 @@
 
 > one timepicker plugin for vue
 
-## Build Setup
+
+## 安装
+
+```JS
+npm install vue-time-lewis -S
+```
+
+## 使用
 
 ``` bash
-# install dependencies
-npm install
+// ES6
+import vueTimeLewis from 'vue-time-lewis.js'
+// require
+var vueTimeLewis = require('TimeLewis')
 
-# serve with hot reload at localhost:8080
-npm run dev
+Vue.use(vueTimeLewis)
 
-# build for production with minification
-npm run build
+// 或者直接使用script导入
+<script src="./node_modules/vue/dist/vue-time-lewis.js"></script>
+
+// 作为组件的方式使用
+<vue-time-lewis></vue-time-lewis>
 ```
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).

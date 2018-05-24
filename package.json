@@ -1,11 +1,14 @@
 {
-  "name": "vue-time-picker",
+  "name": "vue-time-lewis",
   "description": "one timepicker plugin for vue",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": "lewisky",
   "license": "MIT",
-  "main": "dist/vue-pay-keyboard.js", // 这个超级重要 决定了你 import xxx from “vue-pay-keyboard” 它默认就会去找 dist下的vue-pay-keyboard 文件
-  "repository": { "type": "git", "url": "https://github.com/yucccc/vue-pay-keyboard" }, // 配置
+  "main": "dist/vue-time-lewis.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/herolewis/vue-time-lewis.git"
+  },
   "private": false,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
