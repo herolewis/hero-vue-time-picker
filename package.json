@@ -1,0 +1,37 @@
+{
+  "name": "vue-time-picker",
+  "description": "one timepicker plugin for vue",
+  "version": "1.0.0",
+  "author": "lewisky",
+  "license": "MIT",
+  "main": "dist/vue-pay-keyboard.js", // 这个超级重要 决定了你 import xxx from “vue-pay-keyboard” 它默认就会去找 dist下的vue-pay-keyboard 文件
+  "repository": { "type": "git", "url": "https://github.com/yucccc/vue-pay-keyboard" }, // 配置
+  "private": false,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "dependencies": {
+    "vue": "^2.5.11"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "better-scroll": "^1.11.1",
+    "cross-env": "^5.0.5",
+    "cross-spawn": "^6.0.5",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.4",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.11.2"
+  }
+}
