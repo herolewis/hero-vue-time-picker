@@ -17,7 +17,12 @@
                  <img src="http://p72g2g35a.bkt.clouddn.com/time-select-pointer.png" alt="">
                </div>
                <div class="time-line wrapper" ref="wrapper">
-                 <ul class="time-line-ul content" ref="wrapper_ul">
+                 <ul
+                        class="time-line-ul content"
+                        ref="wrapper_ul"
+                         @touchstart.stop.prevent="touchstart"
+                          @touchmove.stop.prevent="touchmove"
+                        @touchend.stop.prevent="touchend">
                    <li class="font-28">
                      <span>
                        <i></i>
@@ -346,6 +351,9 @@ export default {
       if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
         return true;
       }
+    },
+    touchend() {
+      console.log(this.scroll);
     }
   }
 };
