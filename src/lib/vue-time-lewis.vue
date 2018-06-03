@@ -4,7 +4,7 @@
             <header class="time-header">
                <span class="cancel font-28" @click="handleCancel">取消</span>
                 <span class="link">
-                  <a href="#" class="font-24">智能分析</a>
+                  <a :href="linkSrc" class="font-24">智能分析</a>
                   <img src="http://p72g2g35a.bkt.clouddn.com/entry.svg" alt="">
                 </span>
                <span class="ok font-28" @click="handleSubmit">确定</span>
@@ -315,10 +315,25 @@ export default {
     return {
       hours: 6, //小时
       minite: 30, //分钟,
-      STime: "", //当前选择的时间
-      selectedTime: 53400000, //上次选择的时间
-      suggestTime: 48000000 //建议时长
+      STime: "" //当前选择的时间
+      // selectedTime: 53400000, //上次选择的时间
+      // suggestTime: 48000000 //建议时长
     };
+  },
+  props: {
+    selectedTime: {
+      type: Number,
+      default: 53400000 //上次选择的时间
+    },
+    suggestTime: {
+      type: Number,
+      default: 48000000 //建议时长
+    },
+    linkSrc: {
+      type: String,
+      default: "http://www.bilibili.com",
+      required: false
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -389,9 +404,11 @@ export default {
       // 确定最终的数字
       this.STime = this.hours * 60 * 60 * 1000 + this.minite * 60 * 1000;
       console.log(this.STime);
+      this.$emit("getTime", this.STime);
     },
     handleCancel() {
-      //取消弹出层
+      //通过父组件v-if来控制 组件的销毁,取消弹出层
+      this.$emit("hideTP");
     }
   }
 };
