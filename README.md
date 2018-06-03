@@ -2,7 +2,6 @@
 
 > one timepicker plugin for vue
 
-
 ## 安装
 
 ```JS
@@ -11,7 +10,7 @@ npm install vue-time-lewis -S
 
 ## 使用
 
-``` bash
+```bash
 // ES6
 import vueTimeLewis from 'vue-time-lewis.js'
 // require
@@ -26,4 +25,40 @@ Vue.use(vueTimeLewis)
 <vue-time-lewis></vue-time-lewis>
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### example
+
+```
+<template>
+  <div id="app">
+      <button @click="vis=true">显示时间控件</button>
+      <vue-time-lewis
+          v-if="vis"
+          @getTime="getTime"
+          @hideTP="vis=false"
+          :suggestTime="suggestTime"
+          :selectedTime="selectedTime"
+          :linkSrc="linkSrc"
+          >
+          </vue-time-lewis>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "app",
+  data() {
+    return {
+      vis: false,
+      suggestTime: 42000000,
+      selectedTime: 42000000,
+      linkSrc: "http://www.google.com"
+    };
+  },
+  methods: {
+    getTime(time) {
+      console.log(time);
+    }
+  }
+};
+</script>
+```
