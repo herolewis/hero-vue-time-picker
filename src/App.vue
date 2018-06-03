@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <button @click="vis=true">显示时间控件</button>
+           <button @click="vis=true">显示时间控件</button>
       <vue-time-lewis
           v-if="vis"
           @getTime="getTime"

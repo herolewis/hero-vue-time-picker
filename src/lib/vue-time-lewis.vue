@@ -405,6 +405,7 @@ export default {
       this.STime = this.hours * 60 * 60 * 1000 + this.minite * 60 * 1000;
       console.log(this.STime);
       this.$emit("getTime", this.STime);
+      this.$emit("hideTP");
     },
     handleCancel() {
       //通过父组件v-if来控制 组件的销毁,取消弹出层

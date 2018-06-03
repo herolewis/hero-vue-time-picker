@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import App from './App.vue'
-import vuePayKeyboard from './lib/index.js';
-import './lib/flexible.js'
-Vue.use(vuePayKeyboard);
+import Vue from "vue";
+import App from "./App.vue";
+import "./lib/flexible.js";
+import vueTimeLewis from "./lib/index.js";
+Vue.use(vueTimeLewis);
 new Vue({
-  el: '#app',
+  el: "#app",
   render: h => h(App)
-})
+});
