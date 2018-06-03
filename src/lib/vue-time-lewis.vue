@@ -2,15 +2,15 @@
     <div class="time-lewis-container">
         <section class="time-box">
             <header class="time-header">
-               <span class="cancel font-28">取消</span>
+               <span class="cancel font-28" @click="handleCancel">取消</span>
                 <span class="link">
                   <a href="#" class="font-24">智能分析</a>
                   <img src="http://p72g2g35a.bkt.clouddn.com/entry.svg" alt="">
                 </span>
-               <span class="ok font-28">确定</span>
+               <span class="ok font-28" @click="handleSubmit">确定</span>
             </header>
             <section class="time-center">
-               <span class="font-100">6<sub class="font-28">小时</sub></span>
+               <span class="font-100"><i>{{hours}}<sub class="font-28">小时</sub></i><i class="minite" v-if="minite">{{minite}}<sub class="font-28">分钟</sub></i></span>
             </section>
             <footer class="time-footer">
                <div class="time-point">
@@ -20,9 +20,8 @@
                  <ul
                         class="time-line-ul content"
                         ref="wrapper_ul"
-                         @touchstart.stop.prevent="touchstart"
-                          @touchmove.stop.prevent="touchmove"
-                        @touchend.stop.prevent="touchend">
+
+                  >
                    <li class="font-28">
                      <span>
                        <i></i>
@@ -300,6 +299,7 @@
                        <i></i>
                      </span>
                      <b>24</b></li>
+                     <div class="suggestTime" ref="sgt"></div>
                  </ul>
                </div>
             </footer>
@@ -312,25 +312,35 @@ import BScroll from "better-scroll";
 export default {
   name: "vue-time-lewis",
   data() {
-    return {};
+    return {
+      hours: 6, //小时
+      minite: 30, //分钟,
+      STime: "", //当前选择的时间
+      selectedTime: 53400000, //上次选择的时间
+      suggestTime: 48000000 //建议时长
+    };
   },
   mounted() {
     this.$nextTick(() => {
       this.initScroll();
+      this.initTime();
     });
   },
   methods: {
     initScroll() {
       const lis = this.$refs.wrapper_ul.querySelectorAll("li");
-      let lisW = this.isIphone()
+      this.lisW = this.isIphone()
         ? window.screen.width / 3
         : window.screen.width / 6;
+      let self = this;
       lis.forEach((item, index) => {
-        item.style.width = lisW + "px";
+        item.style.width = self.lisW + "px";
         lis[lis.length - 1].style.width = 0 + "px";
       });
-      this.$refs.wrapper_ul.style.width = lisW * 24 + "px";
-
+      if (!this.$refs.wrapper) {
+        return;
+      }
+      this.$refs.wrapper_ul.style.width = self.lisW * 24 + "px";
       if (!this.scroll) {
         this.scroll = new BScroll(this.$refs.wrapper, {
           click: true,
@@ -340,9 +350,32 @@ export default {
           scrollY: false,
           eventPassthrough: "vertical"
         });
+        //设置监听滚动位置
+        this.scroll.on("scrollEnd", pos => {
+          //计算当前选中的时间
+          console.log(pos.x);
+          let temTime = Math.abs(Math.round(pos.x)) / self.lisW;
+          self.setTime(temTime);
+        });
       } else {
         this.scroll.refresh();
       }
+    },
+    initTime() {
+      let initX = this.selectedTime / 3600000 * this.lisW; //初始选择时间
+      let sgtX =
+        (this.suggestTime / 3600000 + 3) * this.lisW -
+        this.$refs.sgt.offsetWidth / 2; //建议选择时间
+      this.$refs.wrapper_ul.style.transform = `translateX(-${initX}px)`;
+      this.setTime(this.selectedTime / 3600000);
+      this.$refs.sgt.style.left = sgtX + "px";
+    },
+    setTime(temTime) {
+      let hours = parseInt(temTime);
+      let minite =
+        Math.round(String(temTime.toFixed(2)).split(".")[1] / 1000 * 60) * 10;
+      this.minite = minite === 0 || minite === 60 ? "" : minite;
+      this.hours = minite === 60 ? hours + 1 : hours;
     },
     isIphone() {
       if (/android/i.test(navigator.userAgent)) {
@@ -352,8 +385,13 @@ export default {
         return true;
       }
     },
-    touchend() {
-      console.log(this.scroll);
+    handleSubmit() {
+      // 确定最终的数字
+      this.STime = this.hours * 60 * 60 * 1000 + this.minite * 60 * 1000;
+      console.log(this.STime);
+    },
+    handleCancel() {
+      //取消弹出层
     }
   }
 };
@@ -473,11 +511,19 @@ export default {
   padding-right: 0.133rem;
 }
 
+.time-lewis-container .time-box .time-header span.link img {
+  width: 0.2267rem;
+  height: 0.24rem;
+}
+
 .time-lewis-container .time-box .time-center {
   width: 100%;
   text-align: center;
   margin-top: 0.453rem;
   margin-bottom: 0.4933rem;
+}
+.time-lewis-container .time-box .time-center i {
+  font-style: normal;
 }
 .time-lewis-container .time-box .time-center sub {
   bottom: 0;
@@ -490,6 +536,7 @@ export default {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 250;
 }
 .time-lewis-container .time-box footer.time-footer .time-point > img {
   width: 1.44rem;
@@ -506,9 +553,24 @@ export default {
   height: 1.8rem;
   padding-left: calc(100vw / 2);
   padding-right: calc(100vw / 2);
-  border-top: 1px solid rgba(216, 216, 216, 0.2);
   font-size: 0;
   display: flex;
+}
+
+.time-lewis-container
+  .time-box
+  footer.time-footer
+  .time-line
+  .time-line-ul
+  div.suggestTime {
+  display: inline-block;
+  background: url(http://p72g2g35a.bkt.clouddn.com/time-flag.svg) no-repeat;
+  background-size: contain;
+  width: 0.5333rem;
+  height: 0.5333rem;
+  position: absolute;
+  left: 0;
+  top: -0.2666rem;
 }
 
 .time-lewis-container
@@ -520,6 +582,8 @@ export default {
   float: left;
   outline-style: none;
   position: relative;
+  border-top: 1px solid rgba(216, 216, 216, 0.2);
+  cursor: pointer;
 }
 .time-lewis-container
   .time-box
@@ -535,7 +599,7 @@ export default {
   background-color: #fff;
   position: absolute;
   left: 0;
-  top: 0;
+  top: -0.04rem;
 }
 
 .time-lewis-container
