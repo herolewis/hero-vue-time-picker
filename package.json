@@ -1,7 +1,7 @@
 {
   "name": "vue-time-lewis",
   "description": "one timepicker plugin for vue",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "lewisky",
   "license": "MIT",
   "main": "dist/vue-time-lewis.js",
