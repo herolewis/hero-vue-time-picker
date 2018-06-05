@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-           <button @click="vis=true">显示时间控件</button>
+      <button @click="vis=true">显示时间控件</button>
       <vue-time-lewis
           v-if="vis"
-          @getTime="getTime"
-          @hideTP="vis=false"
-          :suggestTime="suggestTime"
-          :selectedTime="selectedTime"
-          :linkSrc="linkSrc"
+          @ok="getTime"
+          @cancel="vis=false"
+          :suggest-time="suggestTime"
+          :selected-time="selectedTime"
+          :link-src="linkSrc"
           >
-          </vue-time-lewis>
+       </vue-time-lewis>
   </div>
 </template>
 

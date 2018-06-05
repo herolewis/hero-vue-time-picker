@@ -344,9 +344,7 @@ export default {
   methods: {
     initScroll() {
       const lis = this.$refs.wrapper_ul.querySelectorAll("li");
-      this.lisW = this.isIphone()
-        ? window.screen.width / 3
-        : window.screen.width / 6;
+      this.lisW = window.screen.width / 6;
       let self = this;
       lis.forEach((item, index) => {
         item.style.width = self.lisW + "px";
@@ -404,12 +402,12 @@ export default {
       // 确定最终的数字
       this.STime = this.hours * 60 * 60 * 1000 + this.minite * 60 * 1000;
       console.log(this.STime);
-      this.$emit("getTime", this.STime);
-      this.$emit("hideTP");
+      this.$emit("ok", this.STime);
+      this.$emit("cancel");
     },
     handleCancel() {
       //通过父组件v-if来控制 组件的销毁,取消弹出层
-      this.$emit("hideTP");
+      this.$emit("cancel");
     }
   }
 };

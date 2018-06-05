@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="https://cdn.bootcss.com/vue/2.5.15/vue.js"></script>
+  <script src="./dist/vue-time-lewis.js"></script>
+  <script src="./src/lib/flexible.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="demo">
+    <button @click="vis=true">显示时间控件</button>
+    <vue-time-lewis v-if="vis" @ok="getTime" @cancel="vis=false" :suggest-time="suggestTime" :selected-time="selectedTime" :link-src="linkSrc">
+    </vue-time-lewis>
+  </div>
+</body>
+
+</html>
+<script>
+  var app3 = new Vue({
+    el: '#demo',
+    data() {
+      return {
+        vis: false,
+        suggestTime: 42000000,
+        selectedTime: 42000000,
+        linkSrc: "http://www.google.com"
+      };
+    },
+    methods: {
+      getTime(time) {
+        console.log(time);
+      }
+    }
+  })
+</script>
