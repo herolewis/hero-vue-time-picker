@@ -7,7 +7,6 @@
           @cancel="vis=false"
           :suggest-time="suggestTime"
           :selected-time="selectedTime"
-          :link-src="linkSrc"
           >
        </vue-time-lewis>
   </div>
@@ -20,8 +19,7 @@ export default {
     return {
       vis: false,
       suggestTime: 42000000,
-      selectedTime: 42000000,
-      linkSrc: "http://www.google.com"
+      selectedTime: 42000000
     };
   },
   methods: {

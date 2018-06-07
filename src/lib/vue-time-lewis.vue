@@ -3,10 +3,10 @@
         <section class="time-box">
             <header class="time-header">
                <span class="cancel font-28" @click="handleCancel">取消</span>
-                <span class="link">
+                <!-- <span class="link">
                   <a :href="linkSrc" class="font-24">智能分析</a>
                   <img src="http://p72g2g35a.bkt.clouddn.com/entry.svg" alt="">
-                </span>
+                </span> -->
                <span class="ok font-28" @click="handleSubmit">确定</span>
             </header>
             <section class="time-center">
@@ -328,11 +328,6 @@ export default {
     suggestTime: {
       type: Number,
       default: 48000000 //建议时长
-    },
-    linkSrc: {
-      type: String,
-      default: "http://www.bilibili.com",
-      required: false
     }
   },
   mounted() {
@@ -511,7 +506,7 @@ export default {
   padding-left: 0.4rem;
   letter-spacing: 0.23px;
 }
-.time-lewis-container .time-box .time-header span.link {
+/* .time-lewis-container .time-box .time-header span.link {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -530,7 +525,7 @@ export default {
 .time-lewis-container .time-box .time-header span.link img {
   width: 0.2267rem;
   height: 0.24rem;
-}
+} */
 
 .time-lewis-container .time-box .time-center {
   width: 100%;

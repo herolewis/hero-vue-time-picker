@@ -15,7 +15,7 @@
 <body>
   <div id="demo">
     <button @click="vis=true">显示时间控件</button>
-    <vue-time-lewis v-if="vis" @ok="getTime" @cancel="vis=false" :suggest-time="suggestTime" :selected-time="selectedTime" :link-src="linkSrc">
+    <vue-time-lewis v-if="vis" @ok="getTime" @cancel="vis=false" :suggest-time="suggestTime" :selected-time="selectedTime">
     </vue-time-lewis>
   </div>
 </body>
@@ -28,8 +28,7 @@
       return {
         vis: false,
         suggestTime: 42000000,
-        selectedTime: 42000000,
-        linkSrc: "http://www.google.com"
+        selectedTime: 42000000
       };
     },
     methods: {
