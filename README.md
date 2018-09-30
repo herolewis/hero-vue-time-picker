@@ -1,6 +1,6 @@
 # vue-time-picker
 
-> one timepicker plugin for vue
+> 关于时间选择的vue插件
 
 ## 安装
 
